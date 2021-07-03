@@ -1,27 +1,15 @@
 import { connect } from 'react-redux';
-// import { increment, decrement } from './redux/action';
+import CreateTask from './components/createTask/createTask';
 import Boards from './components/boards/boards';
+import AddTaskButton from './components/addTaskButton/addTaskButton';
 import './App.scss';
 
-// const mapStateToProps = (state) => ({
-//   count: state.count,
-// });
-
-// const mapDispatchToProps = {
-//   increment,
-//   decrement,
-// };
-
-function App({count, increment, decrement}) {
-  // const handleIncrement = () => {
-  //   increment(count);
-  // }
-  // const handleIDecrement = () => {
-  //   decrement(count);
-  // }
+function App() {
   return (
     <div className="App">
+      <AddTaskButton />
       <Boards />
+      <CreateTask />
     </div>
   );
 }

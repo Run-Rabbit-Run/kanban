@@ -1,55 +1,51 @@
-const INITIAL_TASKS_STATE = {
+import { omit } from "lodash";
+
+const INITIAL_STATE = {
   byId: {
     firstTaskId: {
       id: 'firstTaskId',
       title: 'First Task',
       text: 'Something about that task',
+      boardId: 'todosBoard', // inProgressBoard, finishedBoard
     },
     secondTaskId: {
       id: 'secondTaskId',
       title: 'Second Task',
       text: 'Something about that task',
+      boardId: 'todosBoard',
     },
   },
 
   allIds: ['firstTaskId', 'secondTaskId'],
+  draggableTaskId: '',
 };
 
-const INITIAL_BOARDS_STATE = [
-  {
-    id: 'todosBoard',
-    title: 'Невыполненные',
-    tasksId: ['firstTaskId', 'secondTaskId'],
-  },
-  {
-    id: 'inProgressBoard',
-    title: 'В процессе',
-    tasksId: [],
-  },
-  {
-    id: 'finishedBoard',
-    title: 'Завершённые',
-    tasksId: [],
-  },
-];
-
-export const tasks = (state = INITIAL_TASKS_STATE, action) => {
+export const tasks = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
-    default:
-      return state;
-  }
-};
-
-export const boards = (state = INITIAL_BOARDS_STATE, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
+    case 'ADD_NEW_TASK': {
+      const {task} = action.payload;
+      const newById = {...state.byId, [task.id]: task};
+      const newAllIds = [...state.allIds, task.id];
+      return {...state, byId: newById, allIds: newAllIds};
+    }
+    case 'REMOVE_TASK': {
+      const {id} = action.payload;
+      const {byId, allIds} = state;
+      const newById = omit(byId, id);
+      const newAllIds = allIds.filter((taskId) => taskId !== id);
+      return {...state, byId: newById, allIds: newAllIds};
+    }
+    case 'DRAG_TASK': {
+      const {id} = action.payload;
+      return {...state, draggableTaskId: id};
+    }
+    case 'DROP_TASK': {
+      const {boardId, taskId} = action.payload;
+      const {byId} = state;
+      const newTask = {...byId[taskId], boardId: boardId};
+      const newById = {...byId, [taskId]: newTask};
+      return {...state, byId: newById};
+    }
     default:
       return state;
   }

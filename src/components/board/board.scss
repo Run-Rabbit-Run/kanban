@@ -1,6 +1,6 @@
 .board-wrapper {
-  background-color: #7D6B7D;
-  border: 1px solid black;
+  background-color: #8a7f8a;
+  border: 1px solid rgb(87, 87, 87);
   padding: 10px;
 
   .board {
@@ -8,10 +8,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-width: 30vw;
+    width: 30vw;
     height: 100%;
     padding: 10px;
-    background-color: #FF8C64;
+    background-color: #ffc1ad;
     background-size: cover;
   }
 

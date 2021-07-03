@@ -3,13 +3,33 @@
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 15px;
-  background-color: #FFF587;
+  background-color: #fdf9ce;
+  cursor: grab;
 
-  .title {
+  &__title-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  &__title {
     text-align: left;
   }
 
-  .description {
+  &__description {
     text-align: left;
+  }
+
+  &__delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 3px;
+    border: 1px solid burlywood;
+    border-radius: 5px;
+    background-color: #ff9999;
+    cursor: pointer;
   }
 }

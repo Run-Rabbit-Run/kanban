@@ -1,25 +1,46 @@
+import React from "react";
 import Board from "../board/board";
-import { connect } from "react-redux";
 import './boards.scss';
 
-const mapStateToProps = (state) => {
-  const props = {
-    boards: state.boards,
-  }
-  return props;
+const INITIAL_STATE = {
+  byId: {
+    todosBoard: {
+      id: 'todosBoard',
+      title: 'ToDo',
+    },
+    inProgressBoard: {
+      id: 'inProgressBoard',
+      title: 'In progress',
+    },
+    finishedBoard: {
+      id: 'finishedBoard',
+      title: 'Finished',
+    },
+  },
+
+  allIds: ['todosBoard', 'inProgressBoard', 'finishedBoard'],
 };
 
-const Boards = ({boards}) => {
-  console.log(boards)
-  return (
-    <div className='boards'>
-      {boards.map((board) => (
-        <Board
-          board={board}
-        />
-      ))}
-    </div>
-  );
+class Boards extends React.Component {
+  constructor() {
+    super();
+    this.state = INITIAL_STATE
+  }
+
+  render() {
+    const {byId, allIds} = this.state;
+    return (
+      <div className='boards'>
+        {allIds.map((id) => (
+          <Board
+            key={id}
+            board={byId[id]}
+          />
+        ))}
+      </div>
+    );
+  }
+
 }
 
-export default connect(mapStateToProps)(Boards);
+export default Boards;
