@@ -42,6 +42,7 @@ const CreateTask = ({text, title, status, textNewTaskUpdate, titleNewTaskUpdate,
       title,
       text,
       boardId: 'todosBoard',
+      isEditing: false,
     }
     addNewTask(newTask);
   };

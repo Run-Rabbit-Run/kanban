@@ -23,6 +23,22 @@ export const dropTask = (boardId, taskId) => ({
   type: 'DROP_TASK',
   payload: {
     boardId,
-    taskId
+    taskId,
+  }
+});
+
+export const changeTaskEditingStatus = (id) => ({
+  type: 'CHANGE_TASK_EDITING_STATUS',
+  payload: {
+    id,
+  }
+});
+
+export const submitTaskEditing = (id, title, text) => ({
+  type: 'SUBMIT_TASK_EDITING',
+  payload: {
+    id,
+    title,
+    text,
   }
 });

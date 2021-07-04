@@ -7,12 +7,14 @@ const INITIAL_STATE = {
       title: 'First Task',
       text: 'Something about that task',
       boardId: 'todosBoard', // inProgressBoard, finishedBoard
+      isEditing: false,
     },
     secondTaskId: {
       id: 'secondTaskId',
       title: 'Second Task',
       text: 'Something about that task',
       boardId: 'todosBoard',
+      isEditing: false,
     },
   },
 
@@ -22,6 +24,13 @@ const INITIAL_STATE = {
 
 export const tasks = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case 'SUBMIT_TASK_EDITING': {
+      const {id, title, text} = action.payload;
+      const {byId} = state;
+      const newTask = {...byId[id], title: title, text: text, isEditing: false,};
+      const newById = {...byId, [id]: newTask};
+      return {...state, byId: newById};
+    }
     case 'ADD_NEW_TASK': {
       const {task} = action.payload;
       const newById = {...state.byId, [task.id]: task};
@@ -46,7 +55,15 @@ export const tasks = (state = INITIAL_STATE, action) => {
       const newById = {...byId, [taskId]: newTask};
       return {...state, byId: newById};
     }
+    case 'CHANGE_TASK_EDITING_STATUS': {
+      const {id} = action.payload;
+      const {byId} = state;
+      const newTask = {...byId[id], isEditing: !byId[id].isEditing};
+      const newById = {...byId, [id]: newTask};
+      return {...state, byId: newById};
+    }
     default:
       return state;
-  }
-};
+    }
+  };
+  
