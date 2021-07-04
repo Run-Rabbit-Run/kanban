@@ -1,4 +1,17 @@
+.create-task-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(179, 245, 229, 0.493);
+  
+  z-index: 10;
+}
+
 .create-task {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -19,6 +32,7 @@
 
   &__title {
     padding: 5px;
+    margin-bottom: 10px;
   }
   
   &__text {
@@ -28,9 +42,23 @@
     resize: none;
   }
 
-  &__button {
+  &__submit-button {
     align-self: flex-end;
     margin-top: 10px;
     padding: 5px;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 }
